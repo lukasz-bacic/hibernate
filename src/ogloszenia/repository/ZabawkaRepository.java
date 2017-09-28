@@ -33,11 +33,31 @@ public class ZabawkaRepository {
             String hql = "SELECT z FROM Zabawka z WHERE z.cena.wartosc < :price";
             Query query = session.createQuery(hql);
             query.setParameter("price", price);
+
             List<Zabawka> result = query.getResultList();
             return result;
         }catch (Exception ex){
             ex.printStackTrace();
             return Collections.emptyList();
+        }finally {
+            if(session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
+    public static Long countAll(){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            String hql = "SELECT COUNT(z) FROM Zabawka z ";
+            Query query = session.createQuery(hql);
+            Long count = (Long) query.getSingleResult();
+            return count;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return new Long(-1);
         }finally {
             if(session.isOpen()){
                 session.close();

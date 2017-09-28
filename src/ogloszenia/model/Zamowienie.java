@@ -3,6 +3,7 @@ package ogloszenia.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -18,11 +19,21 @@ public class Zamowienie implements Serializable{
     private LocalDateTime dataZamowienia;
     private String email;
 
-    @OneToMany(mappedBy = "zamowienie")
+    @OneToMany(mappedBy = "zamowienie",cascade = CascadeType.ALL)
     Set<PozycjaZamowienia> pozycjaZamowieniaSet;
 
     public Zamowienie() {
     }
+
+    public Zamowienie(String email, HashMap<Zabawka, Integer> pozycjeZamowienia) {
+        this.email = email;
+        this.dataZamowienia = LocalDateTime.now();
+        this.liczbaProduktow =
+                new Long(pozycjeZamowienia.values().stream().mapToInt(x -> x).sum());
+
+    }
+
+
 
     public int getId() {
         return id;

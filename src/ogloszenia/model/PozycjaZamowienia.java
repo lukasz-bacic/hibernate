@@ -16,11 +16,17 @@ public class PozycjaZamowienia implements Serializable {
     @ManyToOne
     @JoinColumn
     private Zabawka zabawka;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Zamowienie zamowienie;
 
     public PozycjaZamowienia() {
+    }
+
+    public PozycjaZamowienia(int liczbaSztuk, Zabawka zabawka, Zamowienie zamowienie) {
+        this.liczbaSztuk = liczbaSztuk;
+        this.zabawka = zabawka;
+        this.zamowienie = zamowienie;
     }
 
     public int getId() {
