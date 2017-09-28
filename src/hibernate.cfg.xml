@@ -10,6 +10,10 @@
         <property name="show_sql">true</property>      
   		<property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="ogloszenia.model.Test" />
+        <mapping class="ogloszenia.model.Zabawka" />
+        <mapping class="ogloszenia.model.Zamowienie" />
+        <mapping class="ogloszenia.model.PozycjaZamowienia" />
+        <mapping class="ogloszenia.model.Atest" />
 
     </session-factory>
 </hibernate-configuration>
