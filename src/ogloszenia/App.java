@@ -8,7 +8,13 @@ import ogloszenia.repository.ZabawkaRepository;
 import ogloszeniar.hibernate.util.HibernateUtil;
 
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
+
+import static java.io.File.createTempFile;
 
 /**
  * Created by Lukasz on 27.09.2017.
@@ -18,6 +24,9 @@ public class App {
     public static void main(String[] args) throws Exception {
         HibernateUtil.openSession();
 
+        Path path = Paths.get("C://lalka.jpg");
+        byte[] image = Files.readAllBytes(path);
+
         Cena cenaLalki = new Cena(new BigDecimal(10), "PLN");
         Zabawka lalka = new Zabawka("Lalka",
                 cenaLalki,
@@ -25,10 +34,24 @@ public class App {
                 5,
                 false,
                 LocalDate.now(),
-                Material.DREWNO
+                Material.DREWNO,
+                image
                 );
 
         ZabawkaRepository.save(lalka);
+
+        List<Zabawka> zabawkiWitgPriceLessThan11 =
+        ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(11));
+
+        zabawkiWitgPriceLessThan11.forEach( x -> System.out.println(x.getNazwa()));
+
+        List<Zabawka> zabawkiWithPriceLessThan5 =
+                ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(5));
+
+        System.out.println("Zabawki za mniej niz 5 !");
+        zabawkiWithPriceLessThan5.forEach( x -> System.out.println(x.getNazwa()));
+
+
 
 
     }

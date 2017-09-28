@@ -16,7 +16,7 @@ public class Zabawka implements Serializable{
 
     }
 
-    public Zabawka(String nazwa, Cena cena, Kolor kolor, int stanMagazynu, boolean czyPromocja, LocalDate dataProdukcji, Material material) {
+    public Zabawka(String nazwa, Cena cena, Kolor kolor, int stanMagazynu, boolean czyPromocja, LocalDate dataProdukcji, Material material, byte[] image) {
         this.nazwa = nazwa;
         this.cena = cena;
         this.kolor = kolor;
@@ -24,6 +24,7 @@ public class Zabawka implements Serializable{
         this.czyPromocja = czyPromocja;
         this.dataProdukcji = dataProdukcji;
         this.material = material;
+        this.image = image;
     }
 
     @Id
@@ -32,14 +33,15 @@ public class Zabawka implements Serializable{
     private String nazwa;
     @Embedded
     private Cena cena;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Kolor kolor;
     private int stanMagazynu;
     private boolean czyPromocja;
     private LocalDate dataProdukcji;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Material material;
-
+    @Lob
+    private byte[] image;
     @OneToOne
     private Atest atest;
     @Transient
@@ -134,5 +136,13 @@ public class Zabawka implements Serializable{
 
     public void setAtest(Atest atest) {
         this.atest = atest;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
