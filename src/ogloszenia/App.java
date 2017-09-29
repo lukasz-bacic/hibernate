@@ -87,7 +87,9 @@ public class App {
         System.out.println(ZabawkaRepository.findZabawkaWithStanAndName().get(0).toString());
 
 
-       ZabawkaRepository.updatePrice( new BigDecimal(55.30));
+       ZabawkaRepository.updatePrice( new BigDecimal("55.50"));
+
+        System.out.println(ZabawkaRepository.findZabawkaByNameLike("UT").size());
 
     }
 }

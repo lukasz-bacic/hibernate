@@ -174,6 +174,25 @@ public class ZabawkaRepository {
 
     }
 
+    public static List<Zabawka> findZabawkaByNameLike(String name){
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String hql  = "SELECT z FROM Zabawka z WHERE UPPER(z.nazwa) like :name";
+            Query query = session.createQuery(hql);
+            query.setParameter("name", "%"+name.toUpperCase()+"%");
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
 
 
 
