@@ -40,6 +40,7 @@ public class Zabawka implements Serializable{
     private LocalDate dataProdukcji;
     @Enumerated(EnumType.STRING)
     private Material material;
+
     @Lob
     private byte[] image;
     @OneToOne
@@ -47,7 +48,7 @@ public class Zabawka implements Serializable{
     @Transient
     private Cena cenaProdukcji;
 
-    @OneToMany(mappedBy = "zabawka")
+    @OneToMany(mappedBy = "zabawka", fetch = FetchType.EAGER)
     Set<PozycjaZamowienia> pozycjaZamowieniaSet;
 
     public int getId() {

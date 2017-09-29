@@ -8,16 +8,18 @@ import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Lukasz on 27.09.2017.
  */
 public class ZabawkaRepository {
 
-    public static int save(Zabawka zabawka){
+    public static int save(Zabawka zabawka) {
         try {
             Session session = HibernateUtil.openSession();
             session.save(zabawka);
+
             return zabawka.getId();
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,7 +28,7 @@ public class ZabawkaRepository {
     }
 
 
-    public static List<Zabawka> findAllWithPriceLessThanParameter(BigDecimal price){
+    public static List<Zabawka> findAllWithPriceLessThanParameter(BigDecimal price) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
@@ -36,33 +38,97 @@ public class ZabawkaRepository {
 
             List<Zabawka> result = query.getResultList();
             return result;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return Collections.emptyList();
-        }finally {
-            if(session.isOpen()){
+        } finally {
+            if (session.isOpen()) {
                 session.close();
             }
         }
 
     }
 
-    public static Long countAll(){
+    public static Long countAll() {
         Session session = null;
-        try{
+        try {
             session = HibernateUtil.openSession();
             String hql = "SELECT COUNT(z) FROM Zabawka z ";
             Query query = session.createQuery(hql);
             Long count = (Long) query.getSingleResult();
             return count;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return new Long(-1);
-        }finally {
-            if(session.isOpen()){
+        } finally {
+            if (session.isOpen()) {
                 session.close();
             }
         }
 
     }
+
+    public static Optional<Zabawka> findZabawka(int id){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            Zabawka z = session.load(Zabawka.class, id);
+            z.getNazwa();
+            return Optional.ofNullable(z);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return Optional.empty();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
+    public static boolean delete(Zabawka zabawka){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            session.beginTransaction();
+            session.delete(zabawka);
+            session.getTransaction().commit();;
+            return true;
+        }catch (Exception ex){
+            if(session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
+            return false;
+        }finally {
+            if(session != null && session.isOpen())
+                session.close();
+        }
+    }
+
+
+    public static boolean update(Zabawka zabawka){
+        Session session= null;
+        try{
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            session.update(zabawka);
+            session.getTransaction().commit();
+            return true;
+
+        }catch (Exception ex){
+            if(session != null && session.getTransaction().isActive()){
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+
+
+
 }

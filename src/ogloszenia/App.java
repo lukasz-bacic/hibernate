@@ -1,9 +1,6 @@
 package ogloszenia;
 
-import ogloszenia.model.Cena;
-import ogloszenia.model.Kolor;
-import ogloszenia.model.Material;
-import ogloszenia.model.Zabawka;
+import ogloszenia.model.*;
 import ogloszenia.repository.ZabawkaRepository;
 import ogloszenia.repository.ZamowienieRepository;
 import ogloszeniar.hibernate.util.HibernateUtil;
@@ -15,6 +12,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import static java.io.File.createTempFile;
 
@@ -64,11 +62,21 @@ public class App {
         // TWORZENIE ZAMOWIENIA
         ZamowienieRepository.createOrder(listaZakupow, "test@gmail.com");
 
+        Optional<Zabawka> zabawka = ZabawkaRepository.findZabawka(5);
 
+        if(  zabawka.isPresent()){
+          zabawka.get().getId();
+        }
 
+        zabawka.ifPresent( x-> System.out.print("z IfPresent "+ x.getId()));
 
-
-
+        //usuwanie zabawki
+        if(  zabawka.isPresent()) {
+            Zabawka z = zabawka.get();
+            z.setStanMagazynu(60);
+            z.setNazwa("Auto");
+            ZabawkaRepository.update(z);
+        }
 
     }
 }
