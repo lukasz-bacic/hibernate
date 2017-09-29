@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 /**
  * Created by Lukasz on 27.09.2017.
@@ -16,13 +17,16 @@ import java.util.Optional;
 public class ZabawkaRepository {
 
     public static int save(Zabawka zabawka) {
+        Session session = null;
         try {
-            Session session = HibernateUtil.openSession();
+            session = HibernateUtil.openSession();
             session.save(zabawka);
 
             return zabawka.getId();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            session.close();
         }
         return 0;
     }
@@ -72,8 +76,7 @@ public class ZabawkaRepository {
         Session session = null;
         try{
             session = HibernateUtil.openSession();
-            Zabawka z = session.load(Zabawka.class, id);
-            z.getNazwa();
+            Zabawka z = session.find(Zabawka.class, id);
             return Optional.ofNullable(z);
         }catch(Exception ex){
             ex.printStackTrace();

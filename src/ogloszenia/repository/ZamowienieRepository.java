@@ -6,10 +6,8 @@ import ogloszenia.model.Zamowienie;
 import ogloszeniar.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.Query;
+import java.util.*;
 
 /**
  * Created by Lukasz on 28.09.2017.
@@ -43,6 +41,27 @@ public class ZamowienieRepository {
             }
         }
 
+    }
+
+
+    public static List<Zamowienie> findAllZamowieniaByZabawka(Zabawka z){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            String hql = "SELECT z FROM Zamowienie z " +
+                    " LEFT JOIN z.pozycjaZamowieniaSet pz " +
+                    " WHERE pz.zabawka.id = :id ";
+            Query query = session.createQuery(hql, Zamowienie.class);
+            query.setParameter("id", z.getId());
+            return query.getResultList();
+        }catch (Exception ex){
+        ex.printStackTrace();
+        return Collections.emptyList();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
 
 
     }

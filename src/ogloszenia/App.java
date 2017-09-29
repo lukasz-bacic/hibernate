@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static java.io.File.createTempFile;
 
@@ -37,8 +38,8 @@ public class App {
                 Material.DREWNO,
                 image
                 );
-
         ZabawkaRepository.save(lalka);
+
 
         List<Zabawka> zabawkiWitgPriceLessThan11 =
         ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(11));
@@ -62,7 +63,7 @@ public class App {
         // TWORZENIE ZAMOWIENIA
         ZamowienieRepository.createOrder(listaZakupow, "test@gmail.com");
 
-        Optional<Zabawka> zabawka = ZabawkaRepository.findZabawka(5);
+        Optional<Zabawka> zabawka = ZabawkaRepository.findZabawka(14);
 
         if(  zabawka.isPresent()){
           zabawka.get().getId();
@@ -72,11 +73,17 @@ public class App {
 
         //usuwanie zabawki
         if(  zabawka.isPresent()) {
+
             Zabawka z = zabawka.get();
             z.setStanMagazynu(60);
             z.setNazwa("Auto");
             ZabawkaRepository.update(z);
+
+            System.out.println(ZamowienieRepository.findAllZamowieniaByZabawka(z).size());
+
+
         }
+
 
     }
 }
