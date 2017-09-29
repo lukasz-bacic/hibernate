@@ -3,6 +3,7 @@ package ogloszenia.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -25,6 +26,12 @@ public class Zabawka implements Serializable{
         this.dataProdukcji = dataProdukcji;
         this.material = material;
         this.image = image;
+    }
+
+
+    public Zabawka(String nazwa, int stanMagazynu) {
+        this.nazwa = nazwa;
+        this.stanMagazynu = stanMagazynu;
     }
 
     @Id
@@ -145,5 +152,23 @@ public class Zabawka implements Serializable{
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Zabawka{" +
+                "id=" + id +
+                ", nazwa='" + nazwa + '\'' +
+                ", cena=" + cena +
+                ", kolor=" + kolor +
+                ", stanMagazynu=" + stanMagazynu +
+                ", czyPromocja=" + czyPromocja +
+                ", dataProdukcji=" + dataProdukcji +
+                ", material=" + material +
+                ", image=" + Arrays.toString(image) +
+                ", atest=" + atest +
+                ", cenaProdukcji=" + cenaProdukcji +
+                ", pozycjaZamowieniaSet=" + pozycjaZamowieniaSet +
+                '}';
     }
 }

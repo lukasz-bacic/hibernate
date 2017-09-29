@@ -131,6 +131,51 @@ public class ZabawkaRepository {
         }
     }
 
+    public static List<Zabawka> findZabawkaWithStanAndName(){
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String hql = "SELECT new Zabawka(nazwa, stanMagazynu)  FROM Zabawka z ";
+            Query query = session.createQuery(hql);
+            return  query.getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return Collections.emptyList();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
+    public static boolean updatePrice(BigDecimal price){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            String sql = "UPDATE zabawki SET wartosc = :price WHERE id > 0";
+            Query query = session.createNativeQuery(sql);
+            query.setParameter("price", price);
+            query.executeUpdate();
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception ex){
+            if(session != null && session.getTransaction().isActive()){
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
+
+
 
 
 
