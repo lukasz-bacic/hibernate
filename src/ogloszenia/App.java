@@ -25,20 +25,20 @@ public class App {
     public static void main(String[] args) throws Exception {
         HibernateUtil.openSession();
 
-        Path path = Paths.get("C://lalka.jpg");
-        byte[] image = Files.readAllBytes(path);
-
-        Cena cenaLalki = new Cena(new BigDecimal(10), "PLN");
-        Zabawka lalka = new Zabawka("Lalka",
-                cenaLalki,
-                Kolor.BIALY,
-                5,
-                false,
-                LocalDate.now(),
-                Material.DREWNO,
-                image
-                );
-        ZabawkaRepository.save(lalka);
+//        Path path = Paths.get("C://lalka.jpg");
+//        byte[] image = Files.readAllBytes(path);
+//
+//        Cena cenaLalki = new Cena(new BigDecimal(10), "PLN");
+//        Zabawka lalka = new Zabawka("Lalka",
+//                cenaLalki,
+//                Kolor.BIALY,
+//                5,
+//                false,
+//                LocalDate.now(),
+//                Material.DREWNO,
+//                image
+//                );
+//        ZabawkaRepository.save(lalka);
 
 //
 //        List<Zabawka> zabawkiWitgPriceLessThan11 =

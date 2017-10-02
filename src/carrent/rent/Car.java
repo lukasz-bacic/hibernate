@@ -10,6 +10,7 @@ import java.util.Set;
 @Entity
 public class Car {
     @Id
+    @Column(columnDefinition = "INT(11) UNSIGNED")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String model;
@@ -27,6 +28,7 @@ public class Car {
     @ManyToMany(mappedBy = "carSet")
     Set<Option> optionSet;
     @OneToMany(mappedBy = "car")
+
     Set<Rent> rentSet;
 
     public Car() {

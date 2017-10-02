@@ -31,4 +31,20 @@ public class UserRepository {
             }
         }
     }
+
+    public static boolean save(User user){
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            session.save(user);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+    }
 }
