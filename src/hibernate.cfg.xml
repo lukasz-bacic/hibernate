@@ -11,12 +11,19 @@
 
         <property name="show_sql">true</property>
 
-  		<!-- <property name="hibernate.hbm2ddl.auto"></property> -->
+  		<property name="hibernate.hbm2ddl.auto">create-drop</property>
         <mapping class="ogloszenia.model.Test" />
         <mapping class="ogloszenia.model.Zabawka" />
         <mapping class="ogloszenia.model.Zamowienie" />
         <mapping class="ogloszenia.model.PozycjaZamowienia" />
         <mapping class="ogloszenia.model.Atest" />
+
+        <mapping class="carrent.account.User" />
+        <mapping class="carrent.rent.Car" />
+        <mapping class="carrent.rent.Customer" />
+        <mapping class="carrent.rent.Rent" />
+        <mapping class="carrent.rent.Option" />
+
 
     </session-factory>
 </hibernate-configuration>

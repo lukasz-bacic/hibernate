@@ -40,56 +40,56 @@ public class App {
                 );
         ZabawkaRepository.save(lalka);
 
-
-        List<Zabawka> zabawkiWitgPriceLessThan11 =
-        ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(11));
-
-        zabawkiWitgPriceLessThan11.forEach( x -> System.out.println(x.getNazwa()));
-
-        List<Zabawka> zabawkiWithPriceLessThan5 =
-                ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(5));
-
-        System.out.println("Zabawki za mniej niz 5 !");
-        zabawkiWithPriceLessThan5.forEach( x -> System.out.println(x.getNazwa()));
-
-
-        Long count = ZabawkaRepository.countAll();
-        System.out.println("Liczba zabawek: " +count);
-
-        HashMap<Zabawka, Integer> listaZakupow = new HashMap<>();
-        listaZakupow.put(zabawkiWitgPriceLessThan11.stream().findAny().orElse(lalka),
-                new Integer(5));
-
-        // TWORZENIE ZAMOWIENIA
-        ZamowienieRepository.createOrder(listaZakupow, "test@gmail.com");
-
-        Optional<Zabawka> zabawka = ZabawkaRepository.findZabawka(14);
-
-        if(  zabawka.isPresent()){
-          zabawka.get().getId();
-        }
-
-        zabawka.ifPresent( x-> System.out.print("z IfPresent "+ x.getId()));
-
-        //usuwanie zabawki
-        if(  zabawka.isPresent()) {
-
-            Zabawka z = zabawka.get();
-            z.setStanMagazynu(60);
-            z.setNazwa("Auto");
-            ZabawkaRepository.update(z);
-
-            System.out.println(ZamowienieRepository.findAllZamowieniaByZabawka(z).size());
-
-
-        }
-
-        System.out.println(ZabawkaRepository.findZabawkaWithStanAndName().get(0).toString());
-
-
-       ZabawkaRepository.updatePrice( new BigDecimal("55.50"));
-
-        System.out.println(ZabawkaRepository.findZabawkaByNameLike("UT").size());
+//
+//        List<Zabawka> zabawkiWitgPriceLessThan11 =
+//        ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(11));
+//
+//        zabawkiWitgPriceLessThan11.forEach( x -> System.out.println(x.getNazwa()));
+//
+//        List<Zabawka> zabawkiWithPriceLessThan5 =
+//                ZabawkaRepository.findAllWithPriceLessThanParameter(new BigDecimal(5));
+//
+//        System.out.println("Zabawki za mniej niz 5 !");
+//        zabawkiWithPriceLessThan5.forEach( x -> System.out.println(x.getNazwa()));
+//
+//
+//        Long count = ZabawkaRepository.countAll();
+//        System.out.println("Liczba zabawek: " +count);
+//
+//        HashMap<Zabawka, Integer> listaZakupow = new HashMap<>();
+//        listaZakupow.put(zabawkiWitgPriceLessThan11.stream().findAny().orElse(lalka),
+//                new Integer(5));
+//
+//        // TWORZENIE ZAMOWIENIA
+//        ZamowienieRepository.createOrder(listaZakupow, "test@gmail.com");
+//
+//        Optional<Zabawka> zabawka = ZabawkaRepository.findZabawka(14);
+//
+//        if(  zabawka.isPresent()){
+//          zabawka.get().getId();
+//        }
+//
+//        zabawka.ifPresent( x-> System.out.print("z IfPresent "+ x.getId()));
+//
+//        //usuwanie zabawki
+//        if(  zabawka.isPresent()) {
+//
+//            Zabawka z = zabawka.get();
+//            z.setStanMagazynu(60);
+//            z.setNazwa("Auto");
+//            ZabawkaRepository.update(z);
+//
+//            System.out.println(ZamowienieRepository.findAllZamowieniaByZabawka(z).size());
+//
+//
+//        }
+//
+//        System.out.println(ZabawkaRepository.findZabawkaWithStanAndName().get(0).toString());
+//
+//
+//       ZabawkaRepository.updatePrice( new BigDecimal("55.50"));
+//
+//        System.out.println(ZabawkaRepository.findZabawkaByNameLike("UT").size());
 
     }
 }
