@@ -3,6 +3,9 @@ package carrent.rent;
 import ogloszeniar.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +15,22 @@ import java.util.Optional;
  * Created by Lukasz on 02.10.2017.
  */
 public class CarRepository {
+
+    public static boolean save(Car car){
+    Session session = null;
+    try{
+        session = HibernateUtil.openSession();
+        session.save(car);
+        return true;
+    }catch (Exception ex){
+        ex.printStackTrace();
+        return false;
+    }finally {
+        if(session != null && session.isOpen()){
+            session.close();
+        }
+    }
+    }
 
     public static Optional<Car> findCar(int id){
         Session session = null;
@@ -52,7 +71,26 @@ public class CarRepository {
                                            CarSegment carSegment,
                                            Make make){
 
-        return Collections.emptyList();
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Car> query = criteriaBuilder.createQuery(Car.class);
+
+            Root<Car> car = query.from(Car.class);
+            query.select(car);
+
+            return session.createQuery(query).getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return Collections.emptyList();
+
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
 
     }
 
