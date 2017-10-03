@@ -1,7 +1,9 @@
 package carrent.rent;
 
 import javax.persistence.*;
+import java.beans.Customizer;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 /**
@@ -123,5 +125,14 @@ public class Car {
 
     public void setOptionSet(Set<Option> optionSet) {
         this.optionSet = optionSet;
+    }
+
+    public boolean rentCar(Customer customer, ZonedDateTime startDate, ZonedDateTime endDate){
+        Rent rent = new Rent(customer,startDate,endDate,this.getBasePrice(), this.getInsuranceCost(),
+                this, "new rent",false );
+
+        return RentRepository.save(rent);
+
+
     }
 }

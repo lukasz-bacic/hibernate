@@ -28,10 +28,17 @@ public class CarRepositoryTest {
 
     @Test
     public void findAvaibleCar() throws Exception {
-        List<Car> avaibleCar = CarRepository.findAvaibleCar(ZonedDateTime.now(), ZonedDateTime.now(),
-                5, CarSegment.BASIC, Make.MERCEDES);
+        List<Car> avaibleMercedesCar = CarRepository.findAvaibleCar(ZonedDateTime.now(), ZonedDateTime.now(),
+                5, CarSegment.PREMIUM, Make.MERCEDES);
 
-        Assert.assertTrue("find car", avaibleCar.size() > 0);
+        Assert.assertTrue("find car", avaibleMercedesCar.size() > 0);
+
+        List<Car> avaibleKiaCar = CarRepository.findAvaibleCar(ZonedDateTime.now(), ZonedDateTime.now(),
+                5, CarSegment.PREMIUM, Make.KIA);
+
+        Assert.assertTrue("find car", avaibleKiaCar.size() == 0);
+
+
     }
 
 }

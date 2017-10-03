@@ -5,6 +5,7 @@ import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 import java.util.Collections;
@@ -70,6 +71,7 @@ public class CarRepository {
                                            Integer capacity,
                                            CarSegment carSegment,
                                            Make make){
+        // TODO dodac warunki z datami
 
         Session session = null;
         try{
@@ -80,6 +82,14 @@ public class CarRepository {
 
             Root<Car> car = query.from(Car.class);
             query.select(car);
+
+            Predicate makePredicate = criteriaBuilder.equal(car.get("make"), make);
+            Predicate carSegmentPredicate = criteriaBuilder.equal(car.get("carSegment"), carSegment);
+            Predicate capacityPredicate = criteriaBuilder.equal(car.get("capacity"), capacity);
+
+            Predicate and = criteriaBuilder.and(makePredicate, carSegmentPredicate, capacityPredicate);
+
+            query.where(and);
 
             return session.createQuery(query).getResultList();
         }catch (Exception ex){
