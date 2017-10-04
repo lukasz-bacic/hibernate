@@ -30,8 +30,25 @@ public class CustomerRepository {
     }
 
     public static boolean update(Customer customer){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            session.update(customer);
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            if(session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
+            return false;
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
 
-        return false;
     }
 
 }
