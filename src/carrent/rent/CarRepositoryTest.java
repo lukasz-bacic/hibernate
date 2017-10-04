@@ -60,19 +60,28 @@ public class CarRepositoryTest {
                 Color.RED,new BigDecimal(300), new BigDecimal(100));
 
         CarRepository.save(car);
-        
-        car.rentCar(new Customer(), ZonedDateTime.now().plusDays(5), ZonedDateTime.now().plusDays(8));
 
-        List<Car> avaibleCar = CarRepository.findAvaibleCar(ZonedDateTime.now(), ZonedDateTime.now().plusDays(3));
+        // szukamy auto i powinno byc dostepne
+        List<Car> newCars = CarRepository.findAvaibleCar(
+                ZonedDateTime.now(), ZonedDateTime.now().plusDays(3));
+        Assert.assertTrue("new cars should by available", newCars.contains(car));
 
-        Assert.assertEquals(car, CarRepository.findCar(car.getId()).get());
-        Assert.assertFalse("rent car is not longer avaible", avaibleCar.contains(car));
+        //rezerwujemy auto na 7 dni za 7 dni
+        car.rentCar(new Customer(), ZonedDateTime.now().plusDays(7), ZonedDateTime.now().plusDays(14));
 
-        car.rentCar(new Customer(), ZonedDateTime.now().plusDays(2), ZonedDateTime.now().plusDays(5));
+//        List<Car> avaibleCarInThisWeek = CarRepository.findAvaibleCar(
+//                ZonedDateTime.now(), ZonedDateTime.now().plusDays(3));
+//        Assert.assertTrue("car should by available in this week", newCars.contains(car));
+//
+//        List<Car> avaibleCarAfterRent = CarRepository.findAvaibleCar(
+//                ZonedDateTime.now().plusDays(16), ZonedDateTime.now().plusDays(18));
+//        Assert.assertTrue("car should by available after rent", newCars.contains(car));
 
-        List<Car> avaibleCar2 = CarRepository.findAvaibleCar(ZonedDateTime.now(), ZonedDateTime.now().plusDays(3));
 
-        Assert.assertFalse("rent car is not longer avaible", avaibleCar2.contains(car));
+        List<Car> avaibleCarInRentDuration = CarRepository.findAvaibleCar(
+                ZonedDateTime.now().plusDays(9), ZonedDateTime.now().plusDays(10));
+        Assert.assertFalse("should not by avaible ", newCars.contains(car));
+
 
 
     }

@@ -56,8 +56,10 @@ public class CarRepository {
             session = HibernateUtil.openSession();
 
             String hql = "SELECT c FROM Car c WHERE c.id" +
-                    " NOT IN (SELECT r.car.id FROM Rent r WHERE (r.startDate < :startDate AND r.endDate > :endDate  ) " +
-                    "OR (  r.startDate > :endDate AND r.endDate > :startDate  ) ) ";
+                    " NOT IN (SELECT r.car.id FROM Rent r WHERE" +
+                    " (r.startDate < :startDate AND r.endDate > :endDate  ) " + //
+                    "OR (  r.endDate < :startDate  ) " + //
+                    "OR ( r.startDate < :endDate ) ) "; //
 
             Query query = session.createQuery(hql);
             query.setParameter("startDate", startDate);

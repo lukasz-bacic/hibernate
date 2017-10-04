@@ -13,6 +13,7 @@ public class RentRepository {
         try{
             session = HibernateUtil.openSession();
             session.save(rent);
+            session.flush();
             return true;
         }catch (Exception ex){
             ex.printStackTrace();
