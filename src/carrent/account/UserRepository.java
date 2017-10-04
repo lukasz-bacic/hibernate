@@ -21,6 +21,7 @@ public class UserRepository {
             Query query = session.createQuery(hql);
             query.setParameter("email", email);
             query.setParameter("password", password);
+
             return Optional.ofNullable((User) query.getSingleResult());
         }catch (Exception ex){
             ex.printStackTrace();

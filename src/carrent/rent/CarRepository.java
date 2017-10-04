@@ -2,6 +2,7 @@ package carrent.rent;
 
 import ogloszeniar.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -50,7 +51,29 @@ public class CarRepository {
 
     public static List<Car> findAvaibleCar(ZonedDateTime startDate,
                                            ZonedDateTime endDate){
-        return findAvaibleCar(startDate, endDate, null);
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+
+            String hql = "SELECT c FROM Car c WHERE c.id" +
+                    " NOT IN (SELECT r.car.id FROM Rent r WHERE (r.startDate < :startDate AND r.endDate > :startDate ) " +
+                    "OR (r.startDate > :endDate AND r.endDate < :endDate) ) ";
+
+            
+            Query query = session.createQuery(hql);
+            query.setParameter("startDate", startDate);
+            query.setParameter("endDate", endDate);
+            return query.getResultList();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return  Collections.emptyList();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
     }
 
     public static List<Car> findAvaibleCar(ZonedDateTime startDate,
@@ -103,5 +126,7 @@ public class CarRepository {
         }
 
     }
+
+
 
 }

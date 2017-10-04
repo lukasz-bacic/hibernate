@@ -11,7 +11,7 @@
 
         <property name="show_sql">true</property>
 
-  		<property name="hibernate.hbm2ddl.auto">create-drop</property>
+  		<property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="ogloszenia.model.Test" />
         <mapping class="ogloszenia.model.Zabawka" />
         <mapping class="ogloszenia.model.Zamowienie" />

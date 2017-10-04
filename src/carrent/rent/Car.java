@@ -3,6 +3,7 @@ package carrent.rent;
 import javax.persistence.*;
 import java.beans.Customizer;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
@@ -30,7 +31,6 @@ public class Car {
     @ManyToMany(mappedBy = "carSet")
     Set<Option> optionSet;
     @OneToMany(mappedBy = "car")
-
     Set<Rent> rentSet;
 
     public Car() {
@@ -128,11 +128,49 @@ public class Car {
     }
 
     public boolean rentCar(Customer customer, ZonedDateTime startDate, ZonedDateTime endDate){
-        Rent rent = new Rent(customer,startDate,endDate,this.getBasePrice(), this.getInsuranceCost(),
+        Long days =Duration.between(startDate, endDate).toDays();
+
+        BigDecimal finalPrice = this.getBasePrice().multiply(days < 1 ? BigDecimal.ONE : new BigDecimal(days));
+        BigDecimal finalInsuranceCost = this.getInsuranceCost().multiply(days< 1? BigDecimal.ONE : new BigDecimal(days));
+
+        Rent rent = new Rent(customer,startDate,endDate, finalPrice, finalInsuranceCost,
                 this, "new rent",false );
 
         return RentRepository.save(rent);
 
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (id == car.id) return true;
+        if (capacity != car.capacity) return false;
+        if (model != null ? !model.equals(car.model) : car.model != null) return false;
+        if (make != car.make) return false;
+        if (engine != null ? !engine.equals(car.engine) : car.engine != null) return false;
+        if (carSegment != car.carSegment) return false;
+        if (color != car.color) return false;
+        if (basePrice != null ? !basePrice.equals(car.basePrice) : car.basePrice != null) return false;
+        return insuranceCost != null ? !insuranceCost.equals(car.insuranceCost) : car.insuranceCost != null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + (make != null ? make.hashCode() : 0);
+        result = 31 * result + capacity;
+      //  result = 31 * result + (engine != null ? engine.hashCode() : 0);
+        result = 31 * result + (carSegment != null ? carSegment.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (basePrice != null ? basePrice.hashCode() : 0);
+        result = 31 * result + (insuranceCost != null ? insuranceCost.hashCode() : 0);
+        return result;
     }
 }
