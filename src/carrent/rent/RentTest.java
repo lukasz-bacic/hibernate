@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class RentTest {
     @Test
     public void cancelRent() throws Exception {
- 
+
     }
 
     @Test
