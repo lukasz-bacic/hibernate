@@ -5,8 +5,17 @@
     <servlet-name>ListOfCarServlet</servlet-name>
     <servlet-class>carrent.rent.ListOfCarServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CarSpec</servlet-name>
+    <servlet-class>carrent.rent.CarSpecServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>ListOfCarServlet</servlet-name>
     <url-pattern>/listOfCar</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CarSpec</servlet-name>
+    <url-pattern>/carSpec</url-pattern>
+  </servlet-mapping>
+
 </web-app>

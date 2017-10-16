@@ -28,7 +28,7 @@ public class Car {
     private Color color;
     private BigDecimal basePrice;
     private BigDecimal insuranceCost;
-    @ManyToMany(mappedBy = "carSet")
+    @ManyToMany(mappedBy = "carSet", fetch = FetchType.EAGER)
     Set<Option> optionSet;
     @OneToMany(mappedBy = "car")
     Set<Rent> rentSet;
