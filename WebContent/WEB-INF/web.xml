@@ -6,6 +6,10 @@
     <servlet-class>carrent.rent.ListOfCarServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>carrent.account.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>CarSpec</servlet-name>
     <servlet-class>carrent.rent.CarSpecServlet</servlet-class>
   </servlet>
@@ -16,6 +20,10 @@
   <servlet-mapping>
     <servlet-name>CarSpec</servlet-name>
     <url-pattern>/carSpec</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -1,6 +1,18 @@
+<%@ page import="carrent.rent.CustomerRepository" %>
+<%@ page import="carrent.rent.Customer" %>
+<%@ page import="java.util.Optional" %>
 <%@ page language="java" contentType="text/html; harset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+  Integer userId = (Integer) request.getSession().getAttribute("userId");
+  if(userId != null){
+    Optional<Customer> customer = CustomerRepository.findById(userId);
+    if(customer.isPresent()){
+        pageContext.setAttribute("customer", customer.get());
+    }
+  }
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,6 +42,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+              <c:if test="${empty customer}">
+                <a class="nav-link btn btn-danger" href="/login.jsp">Zaloguj </a>
+              </c:if>
+              <c:if test="${not empty customer}">
+                <a class="nav-link btn btn-danger" href="/wyloguj">Wyloguj </a>
+              </c:if>
+
+            </li>
+
+            <li class="nav-item">${customer.firstName} ${customer.lastName}</li>
+
             <li class="nav-item active">
               <a class="nav-link" href="#">Home
                 <span class="sr-only">(current)</span>

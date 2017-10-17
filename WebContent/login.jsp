@@ -33,10 +33,10 @@
                 <div class="card card-container">
                     <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
                     <p id="profile-name" class="profile-name-card"></p>
-                    <form class="form-signin">
+                    <form class="form-signin" action="login" method="post">
                         <span id="reauth-email" class="reauth-email"></span>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
                         <div id="remember" class="checkbox">
                             <label>
                                 <input type="checkbox" value="remember-me"> Remember me
