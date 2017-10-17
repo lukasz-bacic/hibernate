@@ -68,4 +68,21 @@ public class RentRepository {
     }
 
 
+    public static List<Rent> findByUserId(int userId) {
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            String hql = "SELECT r FROM Rent r WHERE r.customer.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", userId);
+            return query.getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return Collections.emptyList();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+    }
 }
