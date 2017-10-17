@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
@@ -16,6 +19,8 @@ import java.util.Optional;
  */
 
 public class CarSpecServlet extends HttpServlet {
+
+    private final static String zoneId = "Europe/Warsaw";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,19 +53,26 @@ public class CarSpecServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String id = req.getParameter("carId");
+        String startDate = req.getParameter("startDate");
+        String endDate = req.getParameter("endDate");
+
         Optional<Car> car = CarRepository.findCar(Integer.valueOf(id));
         Customer nowak = new Customer("Jan", "Nowak",
                 LocalDateTime.now(),LocalDateTime.now(),
                 true,"0700600400"
                 );
-        car.ifPresent(x->x.rentCar(nowak,ZonedDateTime.now(),
-                ZonedDateTime.now().plusDays(3)));
+
+        car.ifPresent(x ->  x.rentCar(nowak, parseDateFromCalendar(startDate),
+                parseDateFromCalendar(endDate)));
 
         PrintWriter writer = resp.getWriter();
         writer.write("dodano");
+    }
 
+    public ZonedDateTime parseDateFromCalendar(String date){
+        DateTimeFormatter dateFormatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(date, dateFormatter).atStartOfDay(ZoneId.of(zoneId));
 
     }
 }
