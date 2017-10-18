@@ -4,6 +4,7 @@ import carrent.rent.Option;
 import ogloszeniar.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ public class UserRepository {
             query.setParameter("password", password);
 
             return Optional.ofNullable((User) query.getSingleResult());
+        }catch (NoResultException nre){
+            return  Optional.empty();
         }catch (Exception ex){
             ex.printStackTrace();
             return Optional.empty();

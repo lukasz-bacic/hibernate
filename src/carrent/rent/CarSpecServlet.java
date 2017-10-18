@@ -20,7 +20,6 @@ import java.util.Optional;
 
 public class CarSpecServlet extends HttpServlet {
 
-    private final static String zoneId = "Europe/Warsaw";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,16 +62,11 @@ public class CarSpecServlet extends HttpServlet {
                 true,"0700600400"
                 );
 
-        car.ifPresent(x ->  x.rentCar(nowak, parseDateFromCalendar(startDate),
-                parseDateFromCalendar(endDate)));
+        car.ifPresent(x ->  x.rentCar(nowak, ProjectUtil.parseDateFromCalendar(startDate),
+                ProjectUtil.parseDateFromCalendar(endDate)));
 
         PrintWriter writer = resp.getWriter();
         writer.write("dodano");
     }
 
-    public ZonedDateTime parseDateFromCalendar(String date){
-        DateTimeFormatter dateFormatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(date, dateFormatter).atStartOfDay(ZoneId.of(zoneId));
-
-    }
 }

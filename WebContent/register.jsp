@@ -42,19 +42,22 @@
                         <span id="reauth-email" class="reauth-email"></span>
                         <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
                         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                        <input type="password" id="inputPassword2" name="passwordRepeat" class="form-control" placeholder="Password repeat" required>
+                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Firstname" required>
+                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Lastname" required>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone number" required>
+                        <label>Day of birth</label>
+                        <input type="date" id="dayOfBirth" name="dayOfBirth" class="form-control"  required>
+                        <label>License Car day</label>
+                        <input type="date" id="licenseCarDay" name="licenseCarDay" class="form-control"  required>
+
                         <c:if test="${not empty error}">
                         <div>
                             <p class="alert-danger">Login lub hasło jest nieprawidłowe</p>
                         </div>
                         </c:if>
-                        <div id="remember" class="checkbox">
-                            <label>
-                                <input type="checkbox" value="remember-me"> Remember me
-                            </label>
-                        </div>
-                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
 
-                        <a class="btn btn-lg btn-primary btn-block btn-signin" href="register.jsp">Sign up</a>
+                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign up</button>
 
                     </form><!-- /form -->
                     <a href="#" class="forgot-password">
