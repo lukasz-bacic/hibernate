@@ -22,6 +22,10 @@ public class LoginServlet extends HttpServlet {
 
         Optional<User> user = UserRepository.findUserByEmailAndPassword(email, password);
         user.ifPresent(user1 -> req.getSession().setAttribute("userId", user1.getId()));
-
+        if(user.isPresent()) {
+            resp.sendRedirect("index.jsp");
+        }else{
+            resp.sendRedirect("login.jsp");
+        }
     }
 }

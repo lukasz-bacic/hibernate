@@ -48,7 +48,7 @@
                 <a class="nav-link btn btn-danger" href="/login.jsp">Zaloguj </a>
               </c:if>
               <c:if test="${not empty customer}">
-                <a class="nav-link btn btn-danger" href="/wyloguj">Wyloguj </a>
+                <a class="nav-link btn btn-danger" href="/logout">Wyloguj </a>
               </c:if>
 
             </li>
