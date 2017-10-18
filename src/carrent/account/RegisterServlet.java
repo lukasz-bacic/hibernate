@@ -1,5 +1,7 @@
 package carrent.account;
 
+import carrent.rent.Customer;
+import carrent.rent.CustomerRepository;
 import carrent.rent.ProjectUtil;
 
 import javax.servlet.ServletException;
@@ -7,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Period;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * Created by Lukasz on 18.10.2017.
@@ -53,13 +59,48 @@ public class RegisterServlet extends HttpServlet {
             isValid = false;
             errors.put("phoneNumber", "Prosze podac numer telefonu");
         }
-        if(dayOfBirth == null || dayOfBirth.isEmpty() || ProjectUtil.parseDateFromCalendar(dayOfBirth).){
+        if(dayOfBirth == null || dayOfBirth.isEmpty()){
             isValid = false;
             errors.put("dayOfBirth", "Prosze podac date urodzin");
         }
-        if(licenseCarDay == null || licenseCarDay.isEmpty()){
+        else if(Period.between(ProjectUtil.parseDateFromCalendar(dayOfBirth).toLocalDate(),
+                ZonedDateTime.now().toLocalDate()).getYears() < 18
+                ||
+                Period.between(ProjectUtil.parseDateFromCalendar(dayOfBirth).toLocalDate(),
+                        ZonedDateTime.now().toLocalDate()).getYears() > 90){
+            isValid = false;
+            errors.put("dayOfBirth", "Twoj wiek nie spelnia regulaminu");
+        }
+
+        if(licenseCarDay == null || licenseCarDay.isEmpty()||
+                 ProjectUtil.parseDateFromCalendar(dayOfBirth).isAfter(
+                        ProjectUtil.parseDateFromCalendar(licenseCarDay)
+                )){
             isValid = false;
             errors.put("licenseCarDay","Prosze podac date wydania prawajazdy");
+        }
+        
+        if(!isValid){
+            req.setAttribute("error", errors);
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
+        }else {
+            User user = new User(email, password);
+            UserRepository.save(user);
+            Optional<Customer> customerOptional = CustomerRepository.findByEmail(email);
+            if(customerOptional.isPresent()){
+                Customer customer = customerOptional.get();
+                customer.setPhoneNumber(phoneNumber);
+                customer.setBirthday(ProjectUtil.parseDateFromCalendar(dayOfBirth).toLocalDateTime());
+                customer.setFirstName(firstName);
+                customer.setLastName(lastName);
+                customer.setLicenseCarDay(ProjectUtil.parseDateFromCalendar(licenseCarDay).toLocalDateTime());
+                CustomerRepository.saveOrUpdate(customer);
+                resp.sendRedirect("login.jsp");
+            }else{
+                resp.sendRedirect("register.jsp");
+            }
+            
+
         }
 
     }

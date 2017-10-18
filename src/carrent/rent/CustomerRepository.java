@@ -65,4 +65,25 @@ public class CustomerRepository {
             }
         }
     }
+
+    public static boolean saveOrUpdate(Customer customer) {
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            session.saveOrUpdate(customer);
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception ex){
+            if(session != null && session.getTransaction().isActive()){
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+    }
 }
