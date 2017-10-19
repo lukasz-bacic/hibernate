@@ -46,6 +46,30 @@ public class OptionRepository {
         }
     }
 
+    public static boolean delete(int optionId){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            Option o = session.find(Option.class, optionId);
+            if(o != null) {
+                session.delete(o);
+            }
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception ex){
+            if(session != null && session.getTransaction().isActive() ){
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        }finally {
+            if (session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
 
 
 

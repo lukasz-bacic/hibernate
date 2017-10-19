@@ -41,7 +41,8 @@
               <p>${option.name}</p>
               </div>
               <div class="col-md-2">
-              <a href="/removeOption?optionId=${option.id}" class="btn btn-primary">Usun</a>
+              <a href="/removeOption?optionId=${option.id}"
+                 class="btn btn-primary">Usun</a>
               </div>
 
           </div>

@@ -52,7 +52,7 @@
               </c:if>
 
             </li>
-            
+
             <c:if test="${not empty customer}">
               <a class="nav-link btn btn-danger" href="/adminPanelOptionList.jsp">
                 Dodawanie opcji </a>
