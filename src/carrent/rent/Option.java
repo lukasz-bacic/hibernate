@@ -21,6 +21,12 @@ public class Option {
     )
     Set<Car> carSet;
 
+    public Option(){}
+
+    public Option(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
