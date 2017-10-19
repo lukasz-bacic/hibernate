@@ -49,14 +49,18 @@
 <div class="container">
 
     <div class="card card-container">
-        <form class="form-signin" action="/register" method="post">
+        <form class="form-signin" action="/editCar" method="post">
+
+            <input type="hidden" value="${car.id}" id="id" name="id"
+                   class="form-control">
+
             <input type="text" value="${car.model}" id="model" name="model" class="form-control"
                      placeholder="Car model" required autofocus>
 
             <input type="number" value="${car.insuranceCost}" id="insuranceCost" name="insuranceCost" class="form-control"
                    placeholder="Insurance Cost" required autofocus>
 
-            <input type="number" value="${car.capacity}" id="capacity" name="insuranceCost" class="form-control"
+            <input type="number" value="${car.capacity}" id="capacity" name="capacity" class="form-control"
                    placeholder="capacity" required autofocus>
 
             <input type="number" value="${car.basePrice}" id="basePrice" name="basePrice" class="form-control"
