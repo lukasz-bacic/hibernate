@@ -13,6 +13,27 @@ import java.util.Optional;
  */
 public class UserRepository {
 
+    public static Optional<User> findUserByEmail(String email){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            String hql = "SELECT u FROM User u WHERE u.email = :email " ;
+            Query query = session.createQuery(hql);
+            query.setParameter("email", email);
+
+            return Optional.ofNullable((User) query.getSingleResult());
+        }catch (NoResultException nre){
+            return  Optional.empty();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return Optional.empty();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
     public static Optional<User> findUserByEmailAndPassword(String email, String password){
         Session session = null;
         try{

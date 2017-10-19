@@ -31,11 +31,15 @@ public class RegisterServlet extends HttpServlet {
         String dayOfBirth = req.getParameter("dayOfBirth");
         String licenseCarDay = req.getParameter("licenseCarDay");
 
+        Optional<User> userByEmail = UserRepository.findUserByEmail(email);
         HashMap<String, String> errors = new HashMap<>();
         Boolean isValid = true;
         if(email == null || email.isEmpty()){
          isValid = false;
          errors.put("email", "Zly adres email");
+        }else if(userByEmail.isPresent()){
+            isValid = false;
+            errors.put("email", "Ten email jest juz zarejestrowany");
         }
         if(password == null || password.isEmpty() || password.length() <6 ){
             isValid = false;
@@ -81,6 +85,13 @@ public class RegisterServlet extends HttpServlet {
         }
         
         if(!isValid){
+            HashMap<String, String> variable = new HashMap<>();
+            variable.put("email",email);
+            variable.put("firstName",firstName);
+            variable.put("lastName",lastName);
+            variable.put("phoneNumber",phoneNumber);
+
+            req.setAttribute("variable", variable);
             req.setAttribute("error", errors);
             req.getRequestDispatcher("register.jsp").forward(req, resp);
         }else {

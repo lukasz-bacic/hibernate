@@ -10,8 +10,12 @@
 <%@ page import="java.util.HashMap" %>
 <%
     HashMap<String, String> error = (HashMap<String, String>) request.getAttribute("error");
+    HashMap<String, String> variable =(HashMap<String, String>) request.getAttribute("variable");
     if(error != null)
-    pageContext.setAttribute("error", error);
+        pageContext.setAttribute("error", error);
+    if(variable!= null)
+        pageContext.setAttribute("variable", variable);
+
 
 
 %>
@@ -43,17 +47,17 @@
                     <p id="profile-name" class="profile-name-card"></p>
                     <form class="form-signin" action="/register" method="post">
                         <span id="reauth-email" class="reauth-email"></span>
-                        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="email" value="${variable.get("email")}" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
                         <p>${error.get("email")}</p>
                         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
                         <p>${error.get("password")}</p>
                         <input type="password" id="inputPassword2" name="passwordRepeat" class="form-control" placeholder="Password repeat" required>
                         <p>${error.get("passwordRepeat")}</p>
-                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Firstname" required>
+                        <input type="text" value="${variable.get("firstName")}" id="firstName" name="firstName" class="form-control" placeholder="Firstname" required>
                         <p>${error.get("firstName")}</p>
-                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Lastname" required>
+                        <input type="text" value="${variable.get("lastName")}" id="lastName" name="lastName" class="form-control" placeholder="Lastname" required>
                         <p>${error.get("lastName")}</p>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone number" required>
+                        <input type="text" value="${variable.get("phoneNumber")}" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone number" required>
                         <p>${error.get("phoneNumber")}</p>
                         <label>Day of birth</label>
                         <input type="date" id="dayOfBirth" name="dayOfBirth" class="form-control"  required>
