@@ -78,13 +78,6 @@
                 </c:forEach>
             </select>
 
-
-            <select class="form-control" name="color">
-                <c:forEach var="color" items="${Color.values()}" >
-                    <option value="${color}">${color}</option>
-                </c:forEach>
-            </select>
-
             <select class="form-control" name="color">
             <c:forEach var="color" items="${Color.values()}" >
                 <option value="${color}">${color}</option>
@@ -103,16 +96,16 @@
                 </c:forEach>
             </select>
 
-            <input type="number" value="${car.engine.torque}" id="torque" name="basePrice" class="form-control"
+            <input type="number" value="${car.engine.torque}" id="torque" name="torque" class="form-control"
                    placeholder="Torque" required autofocus>
 
-            <input type="number" value="${car.engine.horsePower}" id="horsePower" name="basePrice" class="form-control"
+            <input type="number" value="${car.engine.horsePower}" id="horsePower" name="horsePower" class="form-control"
                    placeholder="HorsePower" required autofocus>
 
-            <input type="number" value="${car.engine.fuelConsumption}" id="fuelConsumption" name="basePrice" class="form-control"
+            <input type="number" value="${car.engine.fuelConsumption}" id="fuelConsumption" name="fuelConsumption" class="form-control"
                    placeholder="FuelConsumption" required autofocus>
 
-            <input type="number" value="${car.engine.engineCapacity}" id="engineCapacity" name="basePrice" class="form-control"
+            <input type="number" value="${car.engine.engineCapacity}" id="engineCapacity" name="engineCapacity" class="form-control"
                    placeholder="Engine Capacity" required autofocus>
 
 

@@ -2,6 +2,10 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>Wypozyczalnia</display-name>
   <servlet>
+    <servlet-name>EditCarServlet</servlet-name>
+    <servlet-class>carrent.car.EditCarServlet</servlet-class>
+  </servlet>r
+  <servlet>
     <servlet-name>DeleteOptionServlet</servlet-name>
     <servlet-class>carrent.option.DeleteOptionServlet</servlet-class>
   </servlet>
@@ -57,5 +61,8 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>EditCarServlet</servlet-name>
+    <url-pattern>/editCar</url-pattern>
+  </servlet-mapping>
 </web-app>

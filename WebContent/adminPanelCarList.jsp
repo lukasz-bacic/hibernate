@@ -27,7 +27,7 @@
 
         <div class="col-lg-9">
             <div class="row">
-                <a href="/editCar"
+                <a href="/adminPanelEditCar.jsp"
                    class="btn btn-primary">Dodaj</a>
             </div>
 
@@ -37,7 +37,7 @@
               <p>${car.model}</p>
               </div>
               <div class="col-md-2">
-                  <a href="/editCar?carId=${car.id}"
+                  <a href="/adminPanelEditCar.jsp?carId=${car.id}"
                      class="btn btn-primary">Edit</a>
               </div>
               <div class="col-md-2">
