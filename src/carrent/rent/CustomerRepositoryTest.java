@@ -26,7 +26,7 @@ public class CustomerRepositoryTest {
         if(byEmail.isPresent()){
             Customer customer = byEmail.get();
             customer.setPhoneNumber(PHONE_NUMBER);
-            Assert.assertTrue("should save customer", CustomerRepository.update(customer));
+            Assert.assertTrue("should saveOrUpdate customer", CustomerRepository.update(customer));
 
             Customer customerEdit = CustomerRepository.findByEmail(EMAIL).get();
             Assert.assertTrue("should phone by equals",

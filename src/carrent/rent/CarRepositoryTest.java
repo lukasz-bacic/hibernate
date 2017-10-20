@@ -8,8 +8,6 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Lukasz on 03.10.2017.
  */
@@ -23,7 +21,7 @@ public class CarRepositoryTest {
         Car car = new Car("Super Mercedes",Make.MERCEDES,5,engine,CarSegment.PREMIUM,
                 Color.RED,new BigDecimal(300), new BigDecimal(100));
 
-        CarRepository.save(car);
+        CarRepository.saveOrUpdate(car);
 
     }
 
@@ -59,7 +57,7 @@ public class CarRepositoryTest {
         Car car = new Car("Super Mercedes",Make.MERCEDES,5,engine,CarSegment.PREMIUM,
                 Color.RED,new BigDecimal(300), new BigDecimal(100));
 
-        CarRepository.save(car);
+        CarRepository.saveOrUpdate(car);
 
         // szukamy auto i powinno byc dostepne
         List<Car> newCars = CarRepository.findAvaibleCar(

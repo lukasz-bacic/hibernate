@@ -34,13 +34,18 @@ public class CarRepository {
             }
         }
     }
-    public static boolean save(Car car){
+    public static boolean saveOrUpdate(Car car){
     Session session = null;
     try{
         session = HibernateUtil.openSession();
-        session.save(car);
+        session.getTransaction().begin();
+        session.saveOrUpdate(car);
+        session.getTransaction().commit();
         return true;
     }catch (Exception ex){
+        if(session != null && session.getTransaction().isActive()){
+            session.getTransaction().rollback();
+        }
         ex.printStackTrace();
         return false;
     }finally {

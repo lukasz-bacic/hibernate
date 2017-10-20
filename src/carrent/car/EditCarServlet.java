@@ -113,8 +113,10 @@ public class EditCarServlet  extends HttpServlet{
             Engine engine = new Engine(_engineCapacity,_engineType,_fuelConsumption,
                     _gearBox,_horsePower,_torque);
             Car car = new Car(model, _make, _capacity,engine,_carSegment,_color,_basePrice,_insuranceCost);
-
-            CarRepository.save(car);
+            if(_carId != null){
+                car.setId(_carId);
+            }
+            CarRepository.saveOrUpdate(car);
             resp.sendRedirect("adminPanelCarList.jsp");
         }
 

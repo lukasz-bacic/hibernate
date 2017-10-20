@@ -38,7 +38,7 @@ public class App {
 //                Material.DREWNO,
 //                image
 //                );
-//        ZabawkaRepository.save(lalka);
+//        ZabawkaRepository.saveOrUpdate(lalka);
 
 //
 //        List<Zabawka> zabawkiWitgPriceLessThan11 =
