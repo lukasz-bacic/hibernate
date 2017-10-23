@@ -14,10 +14,11 @@ public class Option {
     private int id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             joinColumns=@JoinColumn(name="option_id", referencedColumnName="id"),
             inverseJoinColumns=@JoinColumn(name="car_id")
+
     )
     Set<Car> carSet;
 

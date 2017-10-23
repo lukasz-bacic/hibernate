@@ -128,10 +128,15 @@ public class EditCarServlet  extends HttpServlet{
             Engine engine = new Engine(_engineCapacity,_engineType,_fuelConsumption,
                     _gearBox,_horsePower,_torque);
             Car car = new Car(model, _make, _capacity,engine,_carSegment,_color,_basePrice,_insuranceCost);
-            car.setOptionSet(new HashSet<>( OptionRepository.findAllByIdList(optionList)));
+            OptionRepository.findAllByIdList(optionList);
             if(_carId != null){
                 car.setId(_carId);
             }
+            for(Option o :OptionRepository.findAllByIdList(optionList)){
+                o.getCarSet().add(car);
+                OptionRepository.save(o);
+            }
+
             CarRepository.saveOrUpdate(car);
             resp.sendRedirect("adminPanelCarList.jsp");
         }

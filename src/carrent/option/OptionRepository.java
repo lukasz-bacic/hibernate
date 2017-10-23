@@ -53,9 +53,14 @@ public class OptionRepository {
         Session session = null;
         try{
             session = HibernateUtil.openSession();
-            session.save(option);
+            session.getTransaction().begin();
+            session.saveOrUpdate(option);
+            session.getTransaction().commit();
             return true;
         }catch (Exception ex){
+            if(session.isOpen() && session.getTransaction().isActive()){
+                session.getTransaction().rollback();
+            }
             ex.printStackTrace();
             return false;
         }finally {
