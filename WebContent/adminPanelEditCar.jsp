@@ -149,10 +149,10 @@
                         <div class="row">
                             <label>
                                 <c:if test="${car.optionSet.contains(option)}">
-                                    <input checked="checked" type="checkbox" name="option_${j.index}" class="checkbox-primary"/>
+                                    <input checked="checked" type="checkbox" name="option_${option.id}" class="checkbox-primary"/>
                                 </c:if>
                                 <c:if test="${! car.optionSet.contains(option)}">
-                                    <input type="checkbox" name="option_${j.index}" class="checkbox-primary"/>
+                                    <input type="checkbox" name="option_${option.id}" class="checkbox-primary"/>
                                 </c:if>
                                     ${option.name}
 

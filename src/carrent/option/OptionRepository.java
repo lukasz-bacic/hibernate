@@ -30,6 +30,25 @@ public class OptionRepository {
         }
     }
 
+    public static List<Option> findAllByIdList(List<Integer> idList){
+        Session session = null;
+        try{
+            session = HibernateUtil.openSession();
+            String hql = "SELECT o FROM Option o WHERE o.id IN (:idList)";
+            Query query = session.createQuery(hql);
+            query.setParameter("idList", idList);
+            return query.getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return Collections.emptyList();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
     public static boolean save(Option option){
         Session session = null;
         try{

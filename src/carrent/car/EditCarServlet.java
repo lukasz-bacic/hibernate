@@ -1,5 +1,6 @@
 package carrent.car;
 
+import carrent.option.OptionRepository;
 import carrent.rent.*;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created by Lukasz on 19.10.2017.
@@ -30,6 +34,17 @@ public class EditCarServlet  extends HttpServlet{
         String fuelConsumption = req.getParameter("fuelConsumption");
         String engineCapacity = req.getParameter("engineCapacity");
         String make = req.getParameter("make");
+
+        List<Integer> optionList = new ArrayList<>();
+        Set<String> values = req.getParameterMap().keySet();
+        Iterator<String> optionIterator = values.stream().filter(x -> x.contains("option_")).iterator();
+        while (optionIterator.hasNext()){
+            String option = optionIterator.next();
+            optionList.add(Integer.valueOf(option.replace("option_", "")));
+        }
+
+
+
 
         boolean isValid =true;
 
@@ -113,6 +128,7 @@ public class EditCarServlet  extends HttpServlet{
             Engine engine = new Engine(_engineCapacity,_engineType,_fuelConsumption,
                     _gearBox,_horsePower,_torque);
             Car car = new Car(model, _make, _capacity,engine,_carSegment,_color,_basePrice,_insuranceCost);
+            car.setOptionSet(new HashSet<>( OptionRepository.findAllByIdList(optionList)));
             if(_carId != null){
                 car.setId(_carId);
             }
