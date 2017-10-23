@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96745d2d-8cff-40ab-8bff-7c87850de2a7" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/carrent/car/EditCarServlet.java" afterPath="$PROJECT_DIR$/src/carrent/car/EditCarServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/carrent/option/OptionRepository.java" afterPath="$PROJECT_DIR$/src/carrent/option/OptionRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/carrent/rent/Car.java" afterPath="$PROJECT_DIR$/src/carrent/rent/Car.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/carrent/rent/Option.java" afterPath="$PROJECT_DIR$/src/carrent/rent/Option.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,8 +41,8 @@
       <file leaf-file-name="EditCarServlet.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/carrent/car/EditCarServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2219">
-              <caret line="133" column="13" lean-forward="false" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
+            <state relative-caret-position="210">
+              <caret line="130" column="57" lean-forward="false" selection-start-line="130" selection-start-column="57" selection-end-line="130" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,8 +83,8 @@
       <file leaf-file-name="Car.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/carrent/rent/Car.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            <state relative-caret-position="381">
+              <caret line="36" column="11" lean-forward="true" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -92,11 +93,11 @@
       <file leaf-file-name="Option.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/carrent/rent/Option.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
-                <element signature="e#899#900#0" expanded="true" />
-                <element signature="e#928#929#0" expanded="true" />
+                <element signature="e#760#761#0" expanded="true" />
+                <element signature="e#789#790#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -248,9 +249,9 @@
         <option value="$PROJECT_DIR$/WebContent/adminPanelCarList.jsp" />
         <option value="$PROJECT_DIR$/src/carrent/rent/CarRepository.java" />
         <option value="$PROJECT_DIR$/WebContent/adminPanelEditCar.jsp" />
+        <option value="$PROJECT_DIR$/src/carrent/option/OptionRepository.java" />
         <option value="$PROJECT_DIR$/src/carrent/rent/Car.java" />
         <option value="$PROJECT_DIR$/src/carrent/rent/Option.java" />
-        <option value="$PROJECT_DIR$/src/carrent/option/OptionRepository.java" />
         <option value="$PROJECT_DIR$/src/carrent/car/EditCarServlet.java" />
       </list>
     </option>
@@ -1195,7 +1196,7 @@
       <workItem from="1507130121502" duration="13092000" />
       <workItem from="1507907280743" duration="11945000" />
       <workItem from="1508166424988" duration="56557000" />
-      <workItem from="1508771291840" duration="4376000" />
+      <workItem from="1508771291840" duration="5288000" />
     </task>
     <task id="LOCAL-00001" summary="dodawanie samochodu">
       <created>1508520900253</created>
@@ -1254,7 +1255,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149249000" />
+    <option name="totallyTimeSpent" value="150161000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1291,7 +1292,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.053333335" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24666667" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17021276" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29918033" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -1813,25 +1814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/carrent/rent/Car.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/carrent/rent/Option.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#899#900#0" expanded="true" />
-            <element signature="e#928#929#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/carrent/option/OptionRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
@@ -1840,10 +1822,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/carrent/rent/Option.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#760#761#0" expanded="true" />
+            <element signature="e#789#790#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/carrent/rent/Car.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="36" column="11" lean-forward="true" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/carrent/car/EditCarServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2219">
-          <caret line="133" column="13" lean-forward="false" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
+        <state relative-caret-position="210">
+          <caret line="130" column="57" lean-forward="false" selection-start-line="130" selection-start-column="57" selection-end-line="130" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

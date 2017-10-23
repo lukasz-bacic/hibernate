@@ -28,7 +28,12 @@ public class Car {
     private Color color;
     private BigDecimal basePrice;
     private BigDecimal insuranceCost;
-    @ManyToMany(mappedBy = "carSet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            joinColumns=@JoinColumn(name="car_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="option_id")
+
+    )
     Set<Option> optionSet;
     @OneToMany(mappedBy = "car")
     Set<Rent> rentSet;
